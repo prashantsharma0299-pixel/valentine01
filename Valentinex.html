@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Will You Be My Valentine? 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Arial", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      margin: auto;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.2s ease;
+    }
+
+    #yesBtn {
+      background: #2ecc71;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 120px;
+    }
+
+    #noBtn {
+      background: #e74c3c;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 50px;
+    }
+
+    #celebration {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #celebration img {
+      max-width: 90%;
+      border-radius: 16px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Will you be my Valentine? 💘</h1>
+
+    <div class="buttons">
+      <button id="noBtn">No 😒</button>
+      <button id="yesBtn">Yes 💖</button>
+    </div>
+
+    <div id="celebration">
+      <h2>YAYYY 💕 You said YES!</h2>
+      <img id="gif" src="" alt="Love Gif" />
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    let scale = 1;
+
+    const gifs = [
+      "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif",
+      "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
+      "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
+    ];
+
+    function moveNo() {
+      scale -= 0.1;
+      if (scale < 0.5) scale = 0.5;
+      noBtn.style.transform = `scale(${scale})`;
+
+      const margin = 20;
+      const maxX = window.innerWidth - noBtn.offsetWidth - margin;
+      const maxY = window.innerHeight - noBtn.offsetHeight - margin;
+
+      const x = Math.random() * maxX + margin;
+      const y = Math.random() * maxY + margin;
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    noBtn.addEventListener("mouseenter", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
+
+    yesBtn.addEventListener("click", () => {
+      document.querySelector(".buttons").style.display = "none";
+
+      const randomGif = gifs[Math.floor(Math.random() * gifs.length)];
+      document.getElementById("gif").src = randomGif;
+
+      document.getElementById("celebration").style.display = "block";
+    });
+  </script>
+</body>
+</html>
